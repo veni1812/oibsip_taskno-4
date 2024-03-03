@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Authentication System</title>
+    <style>
+        /* Styles remain the same as in the previous example */
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Login Authentication System</h1>
+    </header>
+
+    <main>
+        <div id="loginForm">
+            <h2>Login</h2>
+            <form id="login">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="button" onclick="authenticateUser()">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="showRegistrationForm()">Register here</a>.</p>
+        </div>
+
+        <div id="registrationForm">
+            <h2>Register</h2>
+            <form id="register">
+                <input type="text" id="registerUsername" placeholder="Username" required>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+                <button type="button" onclick="registerUser()">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a>.</p>
+        </div>
+
+        <div id="securedPage">
+            <h2>Secured Page</h2>
+            <p>Welcome to the secured page!</p>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </main>
+
+    <script>
+        let currentUser = null;
+
+        function showRegistrationForm() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registrationForm").style.display = "block";
+        }
+
+        function showLoginForm() {
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+
+        function authenticateUser() {
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+
+            // Simple authentication logic (replace with secure server-side logic in a real application)
+            if (username === "user" && password === "password") {
+                currentUser = username;
+                showSecuredPage();
+            } else {
+                alert("Invalid username or password");
+            }
+        }
+
+        function registerUser() {
+            const username = document.getElementById("registerUsername").value;
+            const password = document.getElementById("registerPassword").value;
+
+            // Simple registration logic (replace with secure server-side logic in a real application)
+            // For simplicity, we are using local storage to store user data
+            localStorage.setItem(username, password);
+
+            alert("Registration successful! Please login.");
+            showLoginForm();
+        }
+
+        function showSecuredPage() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("securedPage").style.display = "block";
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById("securedPage").style.display = "none";
+            showLoginForm();
+        }
+    </script>
+
+</body>
+</html>
